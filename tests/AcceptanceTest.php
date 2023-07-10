@@ -17,10 +17,11 @@ class AcceptanceTest extends TestCase
     protected function setUp(): void
     {
         $this->fileName = dirname(__FILE__) . '/resources/employee_data.txt';
-        $this->service = new class($this->fileName) extends BirthdayService {
-            public function __construct($fileName)
+        $CsvEmployeeRepository = new CsvEmployeeRepository($this->fileName);
+
+        $this->service = new class($CsvEmployeeRepository) extends BirthdayService {
+            public function __construct($CsvEmployeeRepository)
             {
-                $CsvEmployeeRepository = new CsvEmployeeRepository($fileName);
                 parent::__construct($CsvEmployeeRepository);
             }
 
