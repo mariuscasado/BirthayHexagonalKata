@@ -1,1 +1,0 @@
-{"version":1,"defects":[],"times":{"AcceptanceTest::testWillSendGreetings_whenItsSomebodysBirthday":0.129,"AcceptanceTest::testWillNotSendEmailsWhenNobodysBirthday":0.001,"OurDateTest::testIsSameDate":0.002,"OurDateTest::testExceptionInCreationObject":0.003}}
