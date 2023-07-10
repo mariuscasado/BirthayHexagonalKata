@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\BirthdayService;
+use App\CsvEmployeeRepository;
 use App\OurDate;
 use PHPUnit\Framework\TestCase;
 
@@ -11,10 +12,18 @@ class AcceptanceTest extends TestCase
     private const SMTP_HOST = '127.0.0.1';
     private const SMTP_PORT = 25;
     private BirthdayService $service;
+    private $fileName;
 
     protected function setUp(): void
     {
-        $this->service = new class() extends BirthdayService {
+        $this->fileName = dirname(__FILE__) . '/resources/employee_data.txt';
+        $this->service = new class($this->fileName) extends BirthdayService {
+            public function __construct($fileName)
+            {
+                $CsvEmployeeRepository = new CsvEmployeeRepository($fileName);
+                parent::__construct($CsvEmployeeRepository);
+            }
+
             private array $messageSent = [];
 
             protected function send(Swift_Message $msg, Swift_Mailer $mailer): void
@@ -37,7 +46,6 @@ class AcceptanceTest extends TestCase
     public function testWillSendGreetings_whenItsSomebodysBirthday(): void
     {
         $this->service->sendGreetings(
-            dirname(__FILE__) . '/resources/employee_data.txt',
             new OurDate('2008/10/08'),
             static::SMTP_HOST,
             static::SMTP_PORT
@@ -54,7 +62,6 @@ class AcceptanceTest extends TestCase
     public function testWillNotSendEmailsWhenNobodysBirthday(): void
     {
         $this->service->sendGreetings(
-            dirname(__FILE__) . '/resources/employee_data.txt',
             new OurDate('2008/01/01'),
             static::SMTP_HOST,
             static::SMTP_PORT

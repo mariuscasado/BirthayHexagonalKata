@@ -14,13 +14,16 @@ class BirthdayService
 {
     private CsvEmployeeRepository $repository;
 
+    public function __construct(CsvEmployeeRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function sendGreetings(
-        string $fileName,
         OurDate $ourDate,
         string $smtpHost,
         int $smtpPort
     ): void {
-        $this->repository = new CsvEmployeeRepository($fileName);
         $employees = $this->repository->getEmployees();
 
         foreach($employees as $employee) {
