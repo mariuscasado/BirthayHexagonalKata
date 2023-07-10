@@ -2,7 +2,7 @@
 
 namespace App;
 
-class CsvEmployeeRepository
+class CsvEmployeeRepository implements EmployeeRepository
 {
     private string $fileName;
 

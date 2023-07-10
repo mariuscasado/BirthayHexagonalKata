@@ -12,9 +12,9 @@ use Swift_SmtpTransport;
 
 class BirthdayService
 {
-    private CsvEmployeeRepository $repository;
+    private EmployeeRepository $repository;
 
-    public function __construct(CsvEmployeeRepository $repository)
+    public function __construct(EmployeeRepository $repository)
     {
         $this->repository = $repository;
     }

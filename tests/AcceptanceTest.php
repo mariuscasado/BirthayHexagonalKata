@@ -12,7 +12,7 @@ class AcceptanceTest extends TestCase
     private const SMTP_HOST = '127.0.0.1';
     private const SMTP_PORT = 25;
     private BirthdayService $service;
-    private $fileName;
+    private string $fileName;
 
     protected function setUp(): void
     {
