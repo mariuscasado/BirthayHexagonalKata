@@ -13,11 +13,11 @@ class Employee
     private string $firstName;
     private string $email;
 
-    public function __construct(string $firstName, string $lastName, string $birthDate, string $email)
+    public function __construct(string $firstName, string $lastName, OurDate $birthDate, string $email)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->birthDate = new OurDate($birthDate);
+        $this->birthDate = $birthDate;
         $this->email = $email;
     }
 
